@@ -23,7 +23,7 @@
     {
       "name": "previewToken",
       "title": "Preview Token",
-      "description": "Storyblok CDN v2 preview access token",
+      "description": "Storyblok CDN v2 preview access token. Paste in the raycast token from (https://app.storyblok.com/#/me/spaces/110864/settings?tab=api)",
       "type": "password",
       "required": true
     },
@@ -32,21 +32,40 @@
       "title": "Space ID",
       "description": "Storyblok Space ID",
       "type": "textfield",
-      "required": true
+      "required": true,
+      "default": "110864"
     },
     {
       "name": "productionUrl",
       "title": "Production URL",
-      "description": "Production website base URL (e.g., https://www.webinargeek.com)",
+      "description": "Production website base URL",
       "type": "textfield",
-      "required": true
+      "required": true,
+      "default": "https://www.webinargeek.com"
+    },
+    {
+      "name": "newProductionUrl",
+      "title": "New production URL",
+      "description": "New production website base URL",
+      "type": "textfield",
+      "required": true,
+      "default": "https://schumi.vercel.app"
     },
     {
       "name": "developmentUrl",
       "title": "Development URL",
-      "description": "Local development base URL (e.g., http://localhost:3000)",
+      "description": "Local development base URL",
       "type": "textfield",
-      "required": true
+      "required": true,
+      "default": "https://localhost:4321"
+    },
+    {
+      "name": "gatsbyDevelopmentUrl",
+      "title": "Gatsby Development URL",
+      "description": "Gatsby development base URL",
+      "type": "textfield",
+      "required": true,
+      "default": "https://localhost:8000"
     }
   ],
   "dependencies": {
