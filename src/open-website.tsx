@@ -40,6 +40,7 @@ function LinkItem({ link, revalidate }: { link: CdnLink; revalidate: () => void 
     <List.Item
       title={link.name}
       subtitle={link.slug}
+      keywords={[link.slug]}
       icon={Icon.Document}
       accessories={[
         {
