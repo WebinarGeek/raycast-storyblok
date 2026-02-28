@@ -66,10 +66,3 @@ export function useCdnLinks() {
   );
 }
 
-/**
- * Placeholder slug rewriting function.
- * Add custom logic here to map Storyblok slugs to website paths.
- */
-export function rewriteSlug(slug: string): string {
-  return slug;
-}

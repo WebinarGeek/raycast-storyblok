@@ -1,5 +1,6 @@
 import { Action, ActionPanel, getPreferenceValues, Icon, Keyboard, List } from "@raycast/api";
-import { CdnLink, rewriteSlug, useCdnLinks } from "./utils/storyblok";
+import { CdnLink, useCdnLinks } from "./utils/storyblok";
+import { rewriteSlug } from "./utils/rewriteSlug";
 
 const preferences = getPreferenceValues<{
   spaceId: string;
@@ -21,12 +22,16 @@ export default function Command() {
   );
 }
 
+function createUrl(baseUrl: string, rewrittenSlug: string) {
+  return baseUrl.replace(/\/$/, "") + rewrittenSlug;
+}
+
 function LinkItem({ link, revalidate }: { link: CdnLink; revalidate: () => void }) {
   const rewrittenSlug = rewriteSlug(link.slug);
-  const productionUrl = `${preferences.productionUrl.replace(/\/$/, "")}/${rewrittenSlug}`;
-  const newProductionUrl = `${preferences.newProductionUrl.replace(/\/$/, "")}/${rewrittenSlug}`;
-  const developmentUrl = `${preferences.developmentUrl.replace(/\/$/, "")}/${rewrittenSlug}`;
-  const gatsbyDevelopmentUrl = `${preferences.gatsbyDevelopmentUrl.replace(/\/$/, "")}/${rewrittenSlug}`;
+  const productionUrl = createUrl(preferences.productionUrl, rewrittenSlug);
+  const newProductionUrl = createUrl(preferences.newProductionUrl, rewrittenSlug);
+  const developmentUrl = createUrl(preferences.developmentUrl, rewrittenSlug);
+  const gatsbyDevelopmentUrl = createUrl(preferences.gatsbyDevelopmentUrl, rewrittenSlug);
   const storyblokUrl = `https://app.storyblok.com/#!/me/spaces/${preferences.spaceId}/stories/0/0/${link.id}`;
 
   return (
