@@ -4,7 +4,9 @@ import { CdnLink, rewriteSlug, useCdnLinks } from "./utils/storyblok";
 const preferences = getPreferenceValues<{
   spaceId: string;
   productionUrl: string;
+  newProductionUrl: string;
   developmentUrl: string;
+  gatsbyDevelopmentUrl: string;
 }>();
 
 export default function Command() {
@@ -22,7 +24,9 @@ export default function Command() {
 function LinkItem({ link, revalidate }: { link: CdnLink; revalidate: () => void }) {
   const rewrittenSlug = rewriteSlug(link.slug);
   const productionUrl = `${preferences.productionUrl.replace(/\/$/, "")}/${rewrittenSlug}`;
+  const newProductionUrl = `${preferences.newProductionUrl.replace(/\/$/, "")}/${rewrittenSlug}`;
   const developmentUrl = `${preferences.developmentUrl.replace(/\/$/, "")}/${rewrittenSlug}`;
+  const gatsbyDevelopmentUrl = `${preferences.gatsbyDevelopmentUrl.replace(/\/$/, "")}/${rewrittenSlug}`;
   const storyblokUrl = `https://app.storyblok.com/#!/me/spaces/${preferences.spaceId}/stories/0/0/${link.id}`;
 
   return (
@@ -39,9 +43,19 @@ function LinkItem({ link, revalidate }: { link: CdnLink; revalidate: () => void 
             shortcut={{ modifiers: ["cmd", "shift"], key: "p" } as Keyboard.Shortcut}
           />
           <Action.OpenInBrowser
+            title="Open in New Production"
+            url={newProductionUrl}
+            shortcut={{ modifiers: ["cmd", "shift"], key: "n" } as Keyboard.Shortcut}
+          />
+          <Action.OpenInBrowser
             title="Open in Development"
             url={developmentUrl}
             shortcut={{ modifiers: ["cmd", "shift"], key: "d" } as Keyboard.Shortcut}
+          />
+          <Action.OpenInBrowser
+            title="Open in Gatsby Development"
+            url={gatsbyDevelopmentUrl}
+            shortcut={{ modifiers: ["cmd", "shift"], key: "g" } as Keyboard.Shortcut}
           />
           <Action.OpenInBrowser
             title="Open in Storyblok"
