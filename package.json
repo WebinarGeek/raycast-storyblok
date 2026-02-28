@@ -3,7 +3,7 @@
   "name": "website",
   "title": "Website",
   "description": "Open a website page in different environments: production, development, storyblok",
-  "icon": "extension-icon.png",
+  "icon": "logo.png",
   "author": "XylophoneHero",
   "owner": "webinargeek",
   "platforms": [
