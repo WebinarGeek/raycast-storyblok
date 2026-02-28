@@ -1,4 +1,4 @@
-import { Action, ActionPanel, getPreferenceValues, Icon, Keyboard, List } from "@raycast/api";
+import { Action, ActionPanel, Color, getPreferenceValues, Icon, Keyboard, List } from "@raycast/api";
 import { CdnLink, useCdnLinks } from "./utils/storyblok";
 import { rewriteSlug } from "./utils/rewriteSlug";
 
@@ -15,9 +15,11 @@ export default function Command() {
 
   return (
     <List isLoading={isLoading} searchBarPlaceholder="Search pages...">
-      {links?.map((link) => (
-        <LinkItem key={link.id} link={link} revalidate={revalidate} />
-      ))}
+      {links
+        ?.filter((link) => !link.is_folder)
+        .map((link) => (
+          <LinkItem key={link.id} link={link} revalidate={revalidate} />
+        ))}
     </List>
   );
 }
@@ -38,8 +40,15 @@ function LinkItem({ link, revalidate }: { link: CdnLink; revalidate: () => void 
     <List.Item
       title={link.name}
       subtitle={link.slug}
-      icon={link.is_folder ? Icon.Folder : Icon.Document}
-      accessories={[{ tag: link.published ? "published" : "draft" }]}
+      icon={Icon.Document}
+      accessories={[
+        {
+          tag: {
+            value: link.published ? "published" : "draft",
+            color: link.published ? Color.Green : Color.Orange,
+          },
+        },
+      ]}
       actions={
         <ActionPanel>
           <Action.OpenInBrowser
